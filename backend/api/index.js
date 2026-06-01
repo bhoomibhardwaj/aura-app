@@ -15,14 +15,23 @@ app.get('/api/test', (req, res) => {
 
 // Signup
 app.post('/api/auth/signup', async (req, res) => {
-  // ... your signup logic
-  res.json({ message: 'Signup successful' });
+  try {
+    const { name, email, password } = req.body;
+    res.json({ message: 'Signup successful', name, email });
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
 // Signin
 app.post('/api/auth/signin', async (req, res) => {
-  // ... your signin logic
-  res.json({ message: 'Signin successful' });
+  try {
+    const { email, password } = req.body;
+    res.json({ message: 'Signin successful', email });
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
-export default app;
+// ✅ Correct export for Vercel
+module.exports = app;
